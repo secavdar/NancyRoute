@@ -164,6 +164,8 @@ namespace NancyRoute.Core
                 HttpContext.Current.Application["NancyRoutes"] = list = new List<INancyRoute>();
 
             _routes = list;
+
+            Register();
         }
 
         protected void Map(string routeTemplate, HttpMethod method, string controllerName, string actionName)
@@ -179,5 +181,6 @@ namespace NancyRoute.Core
 
             _routes.Add(new NancyRoute(routeTemplate, method, controllerName, actionName));
         }
+        protected abstract void Register();
     }
 }

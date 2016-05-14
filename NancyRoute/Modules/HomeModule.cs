@@ -5,7 +5,7 @@ namespace NancyRoute.Demo.Modules
 {
     public class HomeModule : GenericNancyModule<HomeController>
     {
-        public HomeModule()
+        protected override void Register()
         {
             Get("Test/{categoryId}/A/{test}", "Test1");
             Post("Test/{categoryId}/A/{test}", "Test2");
