@@ -1,36 +1,33 @@
-﻿using NancyRoute.Controllers;
+﻿using NancyRoute.Core.Contracts;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http.Routing;
 
-namespace NancyRoute.Helpers
+namespace NancyRoute.Core
 {
-    public class RequestHandler : DelegatingHandler
+    public class NancyHandler : DelegatingHandler
     {
-        private readonly List<Route> _routes = new List<Route>();
-
-        public RequestHandler()
+        private List<INancyRoute> Routes
         {
-            this._routes.Add(new Route("/Test1", HttpMethod.Get, "Home", "Test1"));
-            this._routes.Add(new Route("/Test2", HttpMethod.Post, "Home", "Test2"));
-            this._routes.Add(new Route("/Test3", HttpMethod.Put, "Home", "Test3"));
-            //this._routes.Add(new Route("/Test4", HttpMethod.Delete, "Test", "Test"));
-
-            this._routes.Add(Route.Register<TestController>("/Test4/deneme", HttpMethod.Delete, "Test"));
+            get { return HttpContext.Current.Application["NancyRoutes"] as List<INancyRoute>; }
         }
 
         protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
-            var route = this._routes.FirstOrDefault(x => x.Path.Trim('/') == request.RequestUri.LocalPath.Trim('/') && x.Method == request.Method);
-
-            if (route == null)
+            if (Routes == null)
                 return CreateErrorResponse(request, "Invalid Route!!");
 
             var routeData = request.GetRouteData();
+
+            var route = Routes.FirstOrDefault(x => x.RouteTemplate == routeData.Route.RouteTemplate && x.Method == request.Method);
+
+            if (route == null)
+                return CreateErrorResponse(request, "Invalid Route!!");
 
             HttpRouteValueDictionary routes = new HttpRouteValueDictionary(routeData.Values);
             routes["action"] = route.ActionName;

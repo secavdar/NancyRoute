@@ -1,6 +1,6 @@
 ﻿using System.Web.Http;
 
-namespace NancyRoute.Controllers
+namespace NancyRoute.Demo.Controllers
 {
     public class TestController : ApiController
     {

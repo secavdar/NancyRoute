@@ -1,17 +1,17 @@
 ﻿using System.Web.Http;
 
-namespace NancyRoute.Controllers
+namespace NancyRoute.Demo.Controllers
 {
     public class HomeController : ApiController
     {
-        public string Test1()
+        public string Test1(string categoryId, string test)
         {
-            return "Test1";
+            return "Test1 / categoryId:" + categoryId + " / test:" + test;
         }
 
-        public string Test2()
+        public string Test2(string categoryId, string test)
         {
-            return "Test2";
+            return "Test2 / categoryId:" + categoryId + " / test:" + test;
         }
 
         public string Test3()
