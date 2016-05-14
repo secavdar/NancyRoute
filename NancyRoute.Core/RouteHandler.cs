@@ -10,11 +10,11 @@ using System.Web.Http.Routing;
 
 namespace NancyRoute.Core
 {
-    public class NancyHandler : DelegatingHandler
+    public class RouteHandler : DelegatingHandler
     {
-        private List<INancyRoute> Routes
+        private List<IRoute> Routes
         {
-            get { return HttpContext.Current.Application["NancyRoutes"] as List<INancyRoute>; }
+            get { return HttpContext.Current.Application["NancyRoutes"] as List<IRoute>; }
         }
 
         protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)

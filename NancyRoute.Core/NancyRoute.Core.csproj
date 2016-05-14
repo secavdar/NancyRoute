@@ -57,11 +57,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Contracts\INancyRoute.cs" />
-    <Compile Include="NancyHandler.cs" />
-    <Compile Include="NancyHelper.cs" />
-    <Compile Include="NancyModule.cs" />
-    <Compile Include="NancyRoute.cs" />
+    <Compile Include="Contracts\IRoute.cs" />
+    <Compile Include="RouteHandler.cs" />
+    <Compile Include="RouteHelper.cs" />
+    <Compile Include="RouteModule.cs" />
+    <Compile Include="Route.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

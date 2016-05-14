@@ -3,9 +3,9 @@ using System.Net.Http;
 
 namespace NancyRoute.Core
 {
-    public class NancyRoute : INancyRoute
+    public class Route : IRoute
     {
-        public NancyRoute(string routeTemplate, HttpMethod method, string controllerName, string actionName)
+        public Route(string routeTemplate, HttpMethod method, string controllerName, string actionName)
         {
             RouteTemplate = routeTemplate;
             Method = method;

@@ -2,7 +2,7 @@
 
 namespace NancyRoute.Core.Contracts
 {
-    public interface INancyRoute
+    public interface IRoute
     {
         string ActionName { get; set; }
         string ControllerName { get; set; }

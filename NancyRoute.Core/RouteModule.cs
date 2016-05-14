@@ -7,11 +7,11 @@ using System.Web.Http;
 
 namespace NancyRoute.Core
 {
-    public abstract class NancyModule : NancyModuleBase
+    public abstract class RouteModule : NancyModuleBase
     {
-        public NancyModule() { }
+        public RouteModule() { }
 
-        public NancyModule(string controllerName)
+        public RouteModule(string controllerName)
         {
             _controllerName = controllerName;
         }
@@ -154,14 +154,14 @@ namespace NancyRoute.Core
 
     public abstract class NancyModuleBase
     {
-        protected readonly List<INancyRoute> _routes;
+        protected readonly List<IRoute> _routes;
 
         public NancyModuleBase()
         {
-            var list = HttpContext.Current.Application["NancyRoutes"] as List<INancyRoute>;
+            var list = HttpContext.Current.Application["NancyRoutes"] as List<IRoute>;
 
             if (list == null)
-                HttpContext.Current.Application["NancyRoutes"] = list = new List<INancyRoute>();
+                HttpContext.Current.Application["NancyRoutes"] = list = new List<IRoute>();
 
             _routes = list;
 
@@ -179,7 +179,7 @@ namespace NancyRoute.Core
                 defaults: new { controller = controllerName, action = actionName }
             );
 
-            _routes.Add(new NancyRoute(routeTemplate, method, controllerName, actionName));
+            _routes.Add(new Route(routeTemplate, method, controllerName, actionName));
         }
         protected abstract void Register();
     }
